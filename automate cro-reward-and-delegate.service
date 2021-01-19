@@ -1,0 +1,12 @@
+# /etc/systemd/system/chain-automate.service
+[Unit]
+Description=Crypto.com Automatic Validator Operations inspired by Christian Vari
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=root
+ExecStart=bash ./reward-and-delegate-nokey.sh cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 qwertyabcd https://crossfire.crypto.com:443
+
+[Install]
+WantedBy=multi-user.target
