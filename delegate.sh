@@ -20,7 +20,7 @@ while [ true ]
 do
     currentAvailableReward=`./chain-maind query distribution rewards $cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd --output=json | jq -r ".total[0].amount"`
     printf "\r\e[K\e[33mDelegating\e[0m rewards..."
-    echo $qwertyabcd | ./chain-maind tx staking delegate crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 0.5tcro --from cross-fire-testing --chain-id "crossfire" --gas-prices="0.1basetcro" -y > /dev/null 2>&1
+    echo $qwertyabcd | ./chain-maind tx staking delegate crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 "0.0001*currentAvailableReward"tcro --from cross-fire-testing --chain-id "crossfire" --gas-prices="0.1basetcro" -y > /dev/null 2>&1
     sleepTime=$(($0.5*60))
     intAv=${currentAvailableReward%.*}
     printf "\r\e[K\e[32mDone!\e[0m Delegated $intAv basetcro to validator.\n"
