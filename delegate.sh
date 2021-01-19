@@ -11,7 +11,7 @@ validatorAddress="crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923" # tcrocncl1...
 keyName="cross-fire-testing" # Keyring name (often `Default`)
 keyPassword="qwertyabcd" # Keyring password
 gasPrices="0.1basetcro" # For fee calculation
-timeBetweenDelegating="0.1" # Time to wait before next delegation attempt, in minutes
+timeBetweenDelegating="1" # Time to wait before next delegation attempt, in minutes
 
 ################################################
 #            End of user variables             #
