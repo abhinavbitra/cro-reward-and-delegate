@@ -35,12 +35,10 @@ sleep 3s
 
 while [ true ]
 do
-    currentAvailableReward=`./chain-maind query distribution rewards $operatorAddress --output=json | jq -r ".total[0].amount"`
     printf "\r\e[K\e[33mDelegating\e[0m rewards..."
-    echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 1tcro --from $keyName --gas-prices $gasPrices --chain-id crossfire --keyring-backend file -y > /dev/null 2>&1
+    echo $keyPassword | ./chain-maind tx staking delegate crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 1tcro --from $keyName --chain-id "crossfire" --gas-prices=gasPrices --keyring-backend file -y > /dev/null 2>&1
     sleepTime=$(($timeBetweenDelegating*60))
-    intAv=${currentAvailableReward%.*}
-    printf "\r\e[K\e[32mDone!\e[0m Delegated $intAv basetcro to validator.\n"
+    printf "\r\e[K\e[32mDone!\e[0m Delegated 1tcro to validator.\n"
     while [ $sleepTime -gt 0 ]
     do
     	sleepTime=$(($sleepTime-1))
