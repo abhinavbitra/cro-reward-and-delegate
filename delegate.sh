@@ -1,22 +1,3 @@
-#!/bin/bash
-
-# v0.1
-
-################################################
-#               User variables                 #
-################################################
-
-operatorAddress="tcro1..." # tcro1...
-validatorAddress="tcrocncl1..." # tcrocncl1...
-keyName="Default" # Keyring name (often `Default`)
-keyPassword="password" # Keyring password
-gasPrices="0.2basetcro" # For fee calculation
-timeBetweenDelegating="1" # Time to wait before next delegation attempt, in minutes
-
-################################################
-#            End of user variables             #
-################################################
-
 show_cursor() {
     tput cnorm
     clear
