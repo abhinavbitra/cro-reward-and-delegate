@@ -10,8 +10,8 @@ operatorAddress="cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd" # tcro1...
 validatorAddress="crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923" # tcrocncl1...
 keyName="cross-fire-testing" # Keyring name (often `Default`)
 keyPassword="qwertyabcd" # Keyring password
-gasPrices="0.2basetcro" # For fee calculation
-timeBetweenDelegating="1" # Time to wait before next delegation attempt, in minutes
+gasPrices="0.1basetcro" # For fee calculation
+timeBetweenDelegating="0.1" # Time to wait before next delegation attempt, in minutes
 
 ################################################
 #            End of user variables             #
@@ -30,8 +30,6 @@ trap show_cursor INT TERM
 
 hide_cursor
 clear
-printf "\n\e[1;34m*** ARD v0.1: 'Automatic reward delegator', by Jorgeminator ***\e[0m\n"
-printf "\e[34mBased on 'automatic_validator_operations.sh' by Christian Vari, thank you!\e[0m\n\n"
 printf "\e[35mOperator address:\e[0m $operatorAddress\n\e[35mValidator address:\e[0m $validatorAddress\n\e[35mGas price:\e[0m $gasPrices\n\e[35mTime to sleep between delegating:\e[0m $timeBetweenDelegating minute(s)\n\n"
 sleep 3s
 
