@@ -1,11 +1,11 @@
 #!/bin/bash --
 
-echo "Crypto.com Automatic Validator Operations inspired by Christian Vari"
+echo "Crypto.com Automatic Validator Operations script by Christian Vari"
 
 if [ "$#" == 0 ]
 then
     echo "Please run the script as:"
-    echo "./reward-and-delegate-nokey.sh <operatorAddress> <validatorAddress> <keyPassword> <keyring> <node>"
+    echo "./automatic_validator_operations.sh <operatorAddress> <validatorAddress> <keyPassword> <keyring> <node>"
     exit 0
 fi
 
@@ -30,5 +30,5 @@ do
             echo "Re-delegating rewards..."
             echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress "$currentBalance"basetcro --from $keyring --gas 80000000 --gas-prices 0.1basetcro --chain-id="crossfire" --node $node  -y
     fi
-    sleep 0.5m
+    sleep 1m
 done
