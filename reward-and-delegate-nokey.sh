@@ -5,15 +5,14 @@ echo "Crypto.com Automatic Validator Operations script by Christian Vari"
 if [ "$#" == 0 ]
 then
     echo "Please run the script as:"
-    echo "./automatic_validator_operations.sh <operatorAddress> <validatorAddress> <keyPassword> <keyring> <node>"
+    echo "./reward-and-delegate-nokey.sh <operatorAddress> <validatorAddress> <keyPassword> <node>"
     exit 0
 fi
 
 operatorAddress=$1
 validatorAddress=$2
 keyPassword=$3
-keyring=$4
-node=$5
+node=$4
 while [ true ]
 do
     currentBalance=`./chain-maind query bank balances $operatorAddress --output=json --node $node | jq -r ".balances[0].amount"`
