@@ -36,7 +36,7 @@ sleep 3s
 while [ true ]
 do
     printf "\r\e[K\e[33mDelegating\e[0m rewards..."
-    echo $keyPassword | ./chain-maind tx staking delegate crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 1tcro --from $keyName --chain-id "crossfire" --gas-prices=gasPrices --keyring-backend file -y > /dev/null 2>&1
+    echo $keyPassword | ./chain-maind tx staking delegate crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 1tcro --from $keyName --chain-id "crossfire" --gas-prices=gasPrices -y > /dev/null 2>&1
     sleepTime=$(($timeBetweenDelegating*60))
     printf "\r\e[K\e[32mDone!\e[0m Delegated 1tcro to validator.\n"
     while [ $sleepTime -gt 0 ]
