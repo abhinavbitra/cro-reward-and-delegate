@@ -21,12 +21,12 @@ do
     echo "Current Available Delegator Rewards: $currentAvailableReward"
     if (( $(echo "$currentAvailableReward > 10000000000" |bc -l) )) 
     then
-            echo "Withdrawing rewards..."
+            echo "Withdrawing rewards...."
             echo $keyPassword | ./chain-maind tx distribution withdraw-rewards $validatorAddress --commission --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node $node  -y
     fi
     if (( $(echo "$currentBalance > 10000000000" |bc -l) )) 
     then
-            echo "Re-delegating rewards..."
+            echo "Re-delegating rewards...."
             echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress "$currentBalance"tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node $node  -y
     fi
     sleep 1m
