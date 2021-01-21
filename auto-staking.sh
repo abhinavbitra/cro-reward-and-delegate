@@ -19,7 +19,6 @@ do
     echo "Current balance: $currentBalance"
     currentAvailableReward=`./chain-maind query distribution rewards $operatorAddress --output=json --node $node  | jq -r ".total[0].amount"`
     echo "Current Available Delegator Rewards: $currentAvailableReward"
-    fi
     if (( $(echo "$currentBalance > 100000000" |bc -l) )) 
     then
             echo "Re-delegating rewards...."
