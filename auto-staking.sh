@@ -5,7 +5,7 @@ echo "Crypto.com Automatic staker abhi"
 if [ "$#" == 0 ]
 then
     echo "Please run the script as:"
-    echo "./Auto-staking.sh <operatorAddress> <validatorAddress> <keyPassword> <node>"
+    echo "./auto-staking.sh <operatorAddress> <validatorAddress> <keyPassword> <node>"
     exit 0
 fi
 
