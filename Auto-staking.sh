@@ -18,5 +18,5 @@ do
             echo "Re-delegating rewards...."
             echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 1tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node $node  -y
     fi
-    sleep 0s
+    sleep 1s
 done
