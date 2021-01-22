@@ -10,7 +10,7 @@ clear
 
 printf "\n'Automated transaction creator' by eric\nbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 1s
+sleep 2s
 
 printf "\r\e[K\e[32mStart script startup check....\e[0m\n\n"
 
