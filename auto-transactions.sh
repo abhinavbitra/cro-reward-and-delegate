@@ -1,16 +1,20 @@
 #!/bin/bash
 
+# v0.2
+
 ADDRESS=cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd                         #[cro1.....]
 KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
 ACCOUNTNUMBER=83                   #You can find it with the command ./chain-maind query account [cro1....]
 CHAINID=crossfire
+COUNT=500 #Number of transactions till sleepy phase
+SLEEPY=10s #length of sleepy phase
 
 clear
 
 printf "\n'Automated transaction creator' by eric\nbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 2s
+sleep 1s
 
 printf "\r\e[K\e[32mStart script startup check....\e[0m\n\n"
 
@@ -93,10 +97,15 @@ n=$(./chain-maind q account $ADDRESS -o json | jq -r .sequence)
 while true
 do
 
+ for (( i=0; i<$COUNT; ++i)); do
+
   echo $PASSPHRASE  | ./chain-maind tx sign tx.json --chain-id $CHAINID --from $KEYNAME --sequence "${n}" --offline -a $ACCOUNTNUMBER > sig
 
-TX=$(./chain-maind tx broadcast sig --chain-id $CHAINID --broadcast-mode async --log_format json | jq -r .txhash)
+  TX=$(./chain-maind tx broadcast sig --chain-id $CHAINID --broadcast-mode async --log_format json | jq -r .txhash)
 
-echo $TX
+  echo $TX
         ((n++))
+ done
+ printf "\r\e[K\e[32mSleepy phase for $SLEEPY\e[0m\n\n"
+ sleep $SLEEPY
 done
