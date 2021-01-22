@@ -7,8 +7,8 @@ KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
 ACCOUNTNUMBER=83                   #You can find it with the command ./chain-maind query account [cro1....]
 CHAINID=crossfire
-COUNT=500 #Number of transactions till sleepy phase
-SLEEPY=10s #length of sleepy phase
+COUNT=1000 #Number of transactions till sleepy phase
+SLEEPY=5s #length of sleepy phase
 
 clear
 
