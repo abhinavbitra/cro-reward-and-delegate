@@ -8,7 +8,7 @@ PASSPHRASE=qwertyabcd
 ACCOUNTNUMBER=83                   #You can find it with the command ./chain-maind query account [cro1....]
 CHAINID=crossfire
 COUNT=50 #Number of transactions till sleepy phase
-SLEEPY=15s #length of sleepy phase
+SLEEPY=10s #length of sleepy phase
 
 clear
 
