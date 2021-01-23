@@ -7,14 +7,14 @@ KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
 ACCOUNTNUMBER=83                   #You can find it with the command ./chain-maind query account [cro1....]
 CHAINID=crossfire
-COUNT=100 #Number of transactions till sleepy phase
-SLEEPY=25s #length of sleepy phase
+COUNT=50 #Number of transactions till sleepy phase
+SLEEPY=20s #length of sleepy phase
 
 clear
 
 printf "\n'Automated transaction creator' by eric\nbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 5s
+sleep 1s
 
 printf "\r\e[K\e[32mStart script startup check....\e[0m\n\n"
 
