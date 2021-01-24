@@ -55,7 +55,7 @@ then
   printf "\r\e[K\e[32mtx.json already created\e[0m\n\n"
  else
   printf "\r\e[K\e[33mtx.json not found. Creating new.......\e[0m\n"
-  ./chain-maind tx distribution set-withdraw-addr $ADDRESS --from $ADDRESS --chain-id $CHAINID --gas-prices="0.1basetcro" --gas 80000 --generate-only > tx.json
+  ./chain-maind tx distribution set-withdraw-addr $ADDRESS --from $ADDRESS --chain-id $CHAINID --gas-prices="0.1basetcro" --gas 800000 --generate-only > tx.json
   printf "\r\e[K\e[32mNew tx.json created!\e[0m\n\n"
  fi
 
