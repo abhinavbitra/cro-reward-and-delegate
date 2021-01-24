@@ -9,7 +9,7 @@
 ADDRESS=cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd
 KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
-OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
+OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923
 CHAINID=crossfire
 COUNT=500 #Number of transactions till check of last transaction
 SLEEP=60s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
