@@ -1,55 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
-# v0.1
+ADDRESS=cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd #[cro1....]
+KEYNAME=cross-fire-testing
+PASSPHRASE=qwertyabcd
+OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 #[crocncl1....]
+CHAINID=crossfire
 
-################################################
-#               User variables                 #
-################################################
+echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes
 
-operatorAddress="cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd" # tcro1...
-validatorAddress="crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923" # tcrocncl1...
-keyName="cross-fire-testing" # Keyring name (often `Default`)
-keyPassword="qwertyabcd" # Keyring password
-gasPrices="0.2basetcro" # For fee calculation
-timeBetweenDelegating="1" # Time to wait before next delegation attempt, in minutes
 
-################################################
-#            End of user variables             #
-################################################
+AMOUNT=$(/home/eric/chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
+CRO=$(( AMOUNT / 100000000 ))
+printf "Balance: $CRO tCRO"
+echo $AMOUNT
 
-show_cursor() {
-    tput cnorm
-    clear
-    exit
-}
-hide_cursor() {
-    tput civis
-}
-
-trap show_cursor INT TERM
-
-hide_cursor
-clear
-printf "\n\e[1;34m*** ARD v0.1: 'Automatic reward delegator', by Jorgeminator ***\e[0m\n"
-printf "\e[34mBased on 'automatic_validator_operations.sh' by Christian Vari, thank you!\e[0m\n\n"
-printf "\e[35mOperator address:\e[0m $operatorAddress\n\e[35mValidator address:\e[0m $validatorAddress\n\e[35mGas price:\e[0m $gasPrices\n\e[35mTime to sleep between delegating:\e[0m $timeBetweenDelegating minute(s)\n\n"
-sleep 3s
-
-while [ true ]
-do
-    currentAvailableReward=`./chain-maind query distribution rewards $operatorAddress --output=json | jq -r ".total[0].amount"`
-    printf "\r\e[K\e[33mDelegating\e[0m rewards..."
-    echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress "$currentAvailableReward"tcro --from $keyName --gas-prices $gasPrices --chain-id "crossfire" -y > /dev/null 2>&1
-    sleepTime=$(($timeBetweenDelegating*60))
-    intAv=${currentAvailableReward%.*}
-    printf "\r\e[K\e[32mDone!\e[0m Delegated $intAv tcro to validator.\n"
-    while [ $sleepTime -gt 0 ]
-    do
-    	sleepTime=$(($sleepTime-1))
-	printf "\r\e[KSleeping for $timeBetweenDelegating minute(s)... $sleepTime"
-	sleep 1s
-    done
-    printf "\e[1K\e[1A"
-done
-
-show_cursor
+echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --yes
