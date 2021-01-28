@@ -5,7 +5,7 @@ echo "Crypto.com Automatic Validator Operations inspired by Christian Vari"
 if [ "$#" == 0 ]
 then
     echo "Please run the script as:"
-    echo "./reward-and-delegate-nokey-p.sh <operatorAddress> <validatorAddress> <keyPassword> <node>"
+    echo "./reward-and-delegate-nokey-p.sh <operatorAddress> <validatorAddress> <keyPassword>"
     exit 0
 fi
 
