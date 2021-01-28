@@ -28,7 +28,7 @@ TXCOUNT=0
 
 clear
 
-printf "\n\e[35m'Automated transaction creator' by eric\n\e[0mbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
+printf "\n\e[35m'Automated transaction creator' by eric" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
 sleep 2s
 
@@ -137,11 +137,13 @@ then
     fi
  fi
 
- LHEIGHT=$(echo -n $(curl -s http://127.0.0.1:26657/commit | jq "{height: .result.signed_header.header.height}" | cut -c 14- | sed 's/"//g'))
+ LNHEIGHT=$(echo -n $(curl -s http://127.0.0.1:26657/commit | jq "{height: .result.signed_header.header.height}" | cut -c 14- | sed 's/"//g'))
  GHEIGHT=$(echo -n $(curl -s https://crossfire.crypto.com/commit | jq "{height: .result.signed_header.header.height}" | cut -c 14- | sed 's/"//g'))
- printf "Local height: $LHEIGHT \n"
- printf "Network height: $GHEIGHT \n\n"
- HEIGHTDIFF=$(( $GHEIGHT - $LHEIGHT ))
+ LVHEIGHT=$(echo -n $(jq ".height" .chain-maind/data/priv_validator_state.json | cut -d " " -f3 | sed 's/"//g'))
+ printf "Local node height: $LNHEIGHT \n"
+ printf "Network height: $GHEIGHT \n"
+ printf "Last signed block: $LVHEIGHT \n\n"
+ HEIGHTDIFF=$(( $GHEIGHT - $LNHEIGHT ))
  if [[ $HEIGHTDIFF -gt 10 ]]
  then
   printf "\x1b[31mERROR: your node is not fully synced\x1b[0m\n"
@@ -156,7 +158,7 @@ then
  then
   printf "\e[33mWARNING: Not enough funds on your account\e[0m\n"
   printf "Withdrawing rewards from validator...\n"
-  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > dev/null 2>&1
+  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > /dev/null 2>&1
   AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
   CRO=$(( AMOUNT / 100000000 ))
   printf "Your current balance is $AMOUNT tCRO\n\n"
@@ -260,8 +262,9 @@ RETRY=0
    printf "\n\r\e[K\e[33mWARNING: Last transaction is not broadcasted yet\e[0m\nGenerating new one\n"
    echo $PASSPHRASE  | ./chain-maind tx sign tx.json --chain-id $CHAINID --from $KEYNAME --sequence "${n}" --offline -a $ACCOUNTNUMBER > sig
    TX=$(./chain-maind tx broadcast sig --chain-id $CHAINID --broadcast-mode async --log_format json | jq -r .txhash)
+       ((n++))
+
    TXCOUNT=$(($TXCOUNT+1))
-   ((n++))
    if [[ $SHOWTX = true ]]
    then
     echo $TX
@@ -279,7 +282,7 @@ RETRY=0
     printf "\r\e[K\e[36m$TXCOUNT \e[0m$TX\n"
    fi
    RETRY=0
-   until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 20 ]]
+   until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 10 ]]
    do
     printf "\r\e[K\e[33mWARNING: Last transaction is not broadcasted yet \e[0m| Retry No.$RETRY....."
     sleep $CHECKTIME
@@ -297,12 +300,12 @@ RETRY=0
   printf "\e[33mConfirmed after $RETRY checks\e[0m"
  fi
 
- echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --commission --yes > /dev/null 2>&1
+ echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > /dev/null 2>&1
 
  AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
  CRO=$(( AMOUNT / 200000000 ))
 
- echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
+ echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
 
  AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
  CRO=$(( AMOUNT / 100000000 ))
@@ -311,7 +314,7 @@ RETRY=0
  then
   printf "\e[33mWARNING: Not enough funds on your account\e[0m\n"
   printf "Withdrawing rewards from validator...\n"
-  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --commission --yes > dev/null 2>&1
+  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > dev/null 2>&1
   AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
   CRO=$(( AMOUNT / 100000000 ))
   printf "Your current balance is $AMOUNT tCRO\n\n"
