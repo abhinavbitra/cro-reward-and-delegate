@@ -12,9 +12,9 @@ PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
-COUNT=100 #Number of transactions till check of last transaction
-SLEEP=20s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
-CHECKTIME=5s #time between retries for check of last transaction
+COUNT=500 #Number of transactions till check of last transaction
+SLEEP=60s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
+CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=true #show all variables on startup
 STARTCHECK=true #check all variables on startup (recommended)
@@ -279,7 +279,7 @@ RETRY=0
     printf "\r\e[K\e[36m$TXCOUNT \e[0m$TX\n"
    fi
    RETRY=0
-   until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 10 ]]
+   until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 20 ]]
    do
     printf "\r\e[K\e[33mWARNING: Last transaction is not broadcasted yet \e[0m| Retry No.$RETRY....."
     sleep $CHECKTIME
@@ -297,12 +297,12 @@ RETRY=0
   printf "\e[33mConfirmed after $RETRY checks\e[0m"
  fi
 
- echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > /dev/null 2>&1
+ echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --commission --yes > /dev/null 2>&1
 
  AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
  CRO=$(( AMOUNT / 200000000 ))
 
- echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
+ echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
 
  AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
  CRO=$(( AMOUNT / 100000000 ))
@@ -311,7 +311,7 @@ RETRY=0
  then
   printf "\e[33mWARNING: Not enough funds on your account\e[0m\n"
   printf "Withdrawing rewards from validator...\n"
-  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 800000 --gas-prices="0.1basetcro" --commission --yes > dev/null 2>&1
+  echo $PASSPHRASE | ./chain-maind tx distribution withdraw-rewards $OPERATOR --from $KEYNAME --chain-id "CHAINID" --gas 8000000 --gas-prices="0.1basetcro" --commission --yes > dev/null 2>&1
   AMOUNT=$(./chain-maind q bank balances $ADDRESS | grep amount | cut -d " " -f3|sed 's/"//g')
   CRO=$(( AMOUNT / 100000000 ))
   printf "Your current balance is $AMOUNT tCRO\n\n"
