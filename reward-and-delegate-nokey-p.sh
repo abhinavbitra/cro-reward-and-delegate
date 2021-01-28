@@ -21,12 +21,12 @@ do
     if (( $(echo "$currentAvailableReward > 100000000" |bc -l) )) 
     then
             echo "Withdrawing rewards...."
-            echo $keyPassword | ./chain-maind tx distribution withdraw-rewards $validatorAddress --commission --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node https://crossfire.crypto.com:443  -y
+            echo $keyPassword | ./chain-maind tx distribution withdraw-rewards $validatorAddress --commission --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node https://crossfire.crypto.com  -y
     fi
     if (( $(echo "$currentBalance > 100000000" |bc -l) )) 
     then
             echo "Re-delegating rewards...."
-            echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 0.0001tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node https://crossfire.crypto.com:443  -y
+            echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 0.0001tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node https://crossfire.crypto.com  -y
     fi
     sleep 2s
 done
