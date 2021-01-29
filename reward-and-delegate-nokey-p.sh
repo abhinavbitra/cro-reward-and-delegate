@@ -17,5 +17,5 @@ while [ true ]
 do
 echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 0.001tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node $node  -y
     fi
-    sleep 4s
+    sleep 3s
 done
