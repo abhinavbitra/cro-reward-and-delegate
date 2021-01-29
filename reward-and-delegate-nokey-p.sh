@@ -1,6 +1,6 @@
 #!/bin/bash --
 
-echo "Crypto.com Automatic Validator Operations inspired by Christian Vari"
+echo "Crypto.com Automatic Validator Operations"
 
 if [ "$#" == 0 ]
 then
@@ -21,8 +21,8 @@ do
     echo "Current Available Delegator Rewards: $currentAvailableReward"
     if (( $(echo "$currentBalance > 10000" |bc -l) )) 
     then
-            echo "Re-delegating rewards...."
+            echo "Staking...."
             echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress 0.001tcro --from cross-fire-testing --gas 80000000 --gas-prices 0.1basetcro --chain-id "crossfire" --node $node  -y
     fi
-    sleep 8s
+    sleep 2s
 done
