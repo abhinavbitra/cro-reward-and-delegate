@@ -15,6 +15,7 @@ keyPassword=$3
 node=$4
 while [ true ]
 do
+    if
     currentBalance=`./chain-maind query bank balances $operatorAddress --output=json --node $node | jq -r ".balances[0].amount"`
     echo "Current balance: $currentBalance"
     currentAvailableReward=`./chain-maind query distribution rewards $operatorAddress --output=json --node $node  | jq -r ".total[0].amount"`
