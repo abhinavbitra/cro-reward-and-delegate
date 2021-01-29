@@ -19,15 +19,15 @@ do
     echo "Current balance: $currentBalance"
     currentAvailableReward=`./chain-maind query distribution rewards $operatorAddress --output=json --node $node  | jq -r ".total[0].amount"`
     echo "Current Available Delegator Rewards: $currentAvailableReward"
-    if (( $(echo "$currentAvailableReward > 10000000000" |bc -l) )) 
+    if (( $(echo "$currentAvailableReward > 100000000" |bc -l) )) 
     then
             echo "Withdrawing rewards..."
-            echo $keyPassword | ./chain-maind tx distribution withdraw-rewards $validatorAddress --commission --from $keyring --gas 80000000 --gas-prices 0.1basetcro --chain-id="crossfire" --node $node  -y
+            echo $keyPassword | ./chain-maind tx distribution withdraw-rewards $validatorAddress --commission --from $keyring --gas 8000000 --gas-prices 0.1basetcro --chain-id="crossfire" --node $node  -y
     fi
-    if (( $(echo "$currentBalance > 10000000000" |bc -l) )) 
+    if (( $(echo "$currentBalance > 100000000" |bc -l) )) 
     then
             echo "Re-delegating rewards..."
-            echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress "0.01"basetcro --from $keyring --gas 80000000 --gas-prices 0.1basetcro --chain-id="crossfire" --node $node  -y
+            echo $keyPassword | ./chain-maind tx staking delegate $validatorAddress "0.01"basetcro --from $keyring --gas 8000000 --gas-prices 0.1basetcro --chain-id="crossfire" --node $node  -y
     fi
     sleep 8s
 done
