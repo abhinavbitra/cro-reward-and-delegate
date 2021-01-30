@@ -20,7 +20,8 @@ STARTCHECK=true #check all variables on startup (recommended)
 
 #################################################################
 
-ACCOUNTNUMBER=83
+PUBKEY=$(cat .chain-maind/config/priv_validator_key.json | jq -r ".pub_key.value")
+ACCOUNTNUMBER=$(./chain-maind query account $ADDRESS | grep account_number | sed 's/"//g' | cut -c 17-)
 PASSSECURE=$(echo $PASSPHRASE | cut -c 7-)
 TXCOUNT=0
 
