@@ -212,6 +212,6 @@ RETRY=0
 
  printf "\nBalance: $CRO tCRO\n\n"
 
- echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR "$CRO"tcro --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
+ echo $PASSPHRASE | ./chain-maind tx staking delegate $OPERATOR 0.1tcro --from $KEYNAME --chain-id "$CHAINID" --gas 800000 --gas-prices="0.1basetcro" --yes > /dev/null 2>&1
 
 done
