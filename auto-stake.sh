@@ -30,7 +30,7 @@ clear
 
 printf "\n\e[35m'Automated transaction creator' by eric\n\e[0mbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 2s
+sleep 15s
 
 if [ $VARBEGIN = true ]
 then
