@@ -9,7 +9,7 @@
 ADDRESS=cro1k7yvmaffyp8nnp7xepcx0rashu8rv3yu4uvvgd # [cro1.....]
 KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
-OPERATOR=crocnclconspub1zcjduepqx2x842e03wdvf980k2natgh5jgmmth0jsmyj3s45zy3z0y36s4vqd89awh # [crocncl1.....]
+OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
 COUNT=1000 #Number of transactions till check of last transaction
