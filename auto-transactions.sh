@@ -11,7 +11,7 @@ KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923
 CHAINID=crossfire
-COUNT=200 #Number of transactions till check of last transaction
+COUNT=100 #Number of transactions till check of last transaction
 SLEEP=10s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
 CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count #show tx-hashes in the output [true|new|count|count+new|point|false]
