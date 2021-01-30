@@ -14,7 +14,7 @@ CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
 COUNT=1000 #Number of transactions till check of last transaction
 SLEEP=60s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
-CHECKTIME=5s #time between retries for check of last transaction
+CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=false #show all variables on startup
 STARTCHECK=true #check all variables on startup (recommended)
@@ -30,7 +30,7 @@ clear
 
 printf "\n\e[35m'Automated transaction creator' by eric\n\e[0mbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 15s
+sleep 10s
 
 if [ $VARBEGIN = true ]
 then
