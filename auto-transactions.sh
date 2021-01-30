@@ -11,8 +11,8 @@ KEYNAME=cross-fire-testing
 PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923
 CHAINID=crossfire
-COUNT=100 #Number of transactions till check of last transaction
-SLEEP=20s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
+COUNT=200 #Number of transactions till check of last transaction
+SLEEP=10s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
 CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count #show tx-hashes in the output [true|new|count|count+new|point|false]
 VARBEGIN=true #show all variables on startup
@@ -29,7 +29,7 @@ clear
 
 printf "\n\e[35m'Automated transaction creator' by eric\n\e[0mbased on a script by samduckling\n\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 15s
+sleep 30s
 
 if [ $VARBEGIN = true ]
 then
