@@ -20,7 +20,7 @@ STARTCHECK=true #check all variables on startup (recommended)
 
 #################################################################
 
-ACCOUNTNUMBER=$(./chain-maind query account $ADDRESS | grep account_number | sed 's/"//g' | cut -c 17-)
+ACCOUNTNUMBER=83
 PASSSECURE=$(echo $PASSPHRASE | cut -c 7-)
 TXCOUNT=0
 
