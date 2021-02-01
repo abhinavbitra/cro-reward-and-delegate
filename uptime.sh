@@ -17,7 +17,7 @@ fi
 
 cheight=$(curl -s http://127.0.0.01:26657/commit | jq -r .result.signed_header.header.height)
 lheight=$(expr $cheight - $hist)
-address="B61C9F0D8BAF75AC5E35437221C869EE86A320AC"
+address=$address
 
 sigs=0
 for (( height=$lheight ; height < $cheight ; height++)); do
