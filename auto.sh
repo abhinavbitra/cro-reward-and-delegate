@@ -311,7 +311,6 @@ RETRY=0
    then
     printf "\x1b[31mERROR: Not enough funds in your account to pay for the gas\x1b[0m\n"
     exit 1
-   fi
  fi
  printf "\e[32mSufficient balance to pay for gas\e[0m\n\n"
 
