@@ -12,9 +12,9 @@ PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
-COUNT=150 #Number of transactions till check of last transaction
-SLEEP=10s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
-CHECKTIME=20s #time between retries for check of last transaction
+COUNT=1000 #Number of transactions till check of last transaction
+SLEEP=60s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
+CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=false #show all variables on startup
 STARTCHECK=true #check all variables on startup (recommended)
@@ -236,14 +236,14 @@ RETRY=0
  fi
 
  printf "\nChecking last transaction.....\n"
- until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 10 ]]
+ until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 15 ]]
  do
   printf "\r\e[K\e[33mWARNING: Last transaction is not broadcasted yet \e[0m| Retry No.$RETRY....."
   sleep $CHECKTIME
   RETRY=$(($RETRY+1))
  done
 
- if [[ $RETRY -eq 10 ]]
+ if [[ $RETRY -eq 15 ]]
  then
   printf "\n\nChecking if node is synced.....\n"
   LHEIGHT=$(echo -n $(curl -s http://127.0.0.1:26657/commit | jq "{height: .result.signed_header.header.height}" | cut -c 14- | sed 's/"//g'))
