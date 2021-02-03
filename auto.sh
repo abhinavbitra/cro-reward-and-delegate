@@ -12,9 +12,9 @@ PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
-COUNT=1000 #Number of transactions till check of last transaction
+COUNT=500 #Number of transactions till check of last transaction
 SLEEP=60s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
-CHECKTIME=10s #time between retries for check of last transaction
+CHECKTIME=15s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=false #show all variables on startup
 STARTCHECK=true #check all variables on startup (recommended)
@@ -30,7 +30,7 @@ clear
 
 printf "\n\e[35m'Automated transaction creator\n" #(https://discord.com/channels/783264383978569728/790404424433926155/801438774000091208)
 
-sleep 1s
+sleep 0s
 
 if [ $VARBEGIN = true ]
 then
