@@ -12,8 +12,8 @@ PASSPHRASE=qwertyabcd
 OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
-COUNT=1000 #Number of transactions till check of last transaction
-SLEEP=30s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
+COUNT=100 #Number of transactions till check of last transaction
+SLEEP=10s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
 CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=false #show all variables on startup
@@ -236,7 +236,7 @@ RETRY=0
  fi
 
  printf "\nChecking last transaction.....\n"
- until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 15 ]]
+ until ((./chain-maind q tx $TX | grep -q $ADDRESS) > /dev/null 2>&1) || [[ $RETRY -eq 25 ]]
  do
   printf "\r\e[K\e[33mWARNING: Last transaction is not broadcasted yet \e[0m| Retry No.$RETRY....."
   sleep $CHECKTIME
