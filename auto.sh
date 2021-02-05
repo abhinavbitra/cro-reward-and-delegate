@@ -13,7 +13,7 @@ OPERATOR=crocncl1k7yvmaffyp8nnp7xepcx0rashu8rv3yuk30923 # [crocncl1.....]
 CHAINID=crossfire
 TENDERMINT=https://crossfire.crypto.com/
 COUNT=100 #Number of transactions till check of last transaction
-SLEEP=5s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
+SLEEP=15s #length of the sleep before the scrip tries to check if the last transaction was broadcasted (0 = disabled)
 CHECKTIME=10s #time between retries for check of last transaction
 SHOWTX=count+new #show tx-hashes in the output [true|new|count|point|false]
 VARBEGIN=false #show all variables on startup
